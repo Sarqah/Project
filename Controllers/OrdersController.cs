@@ -55,7 +55,7 @@ namespace CustomerOrdersApi
             private IDatabaseMongo _DatabaseMongo;
 
            
-        public ProductsController(IDatabaseMongo DatabaseMongoIDatabaseMongo _DatabaseMongo) : base()
+        public ProductsController(IDatabaseMongo DatabaseMongo) : base()
         {
             _DatabaseMongo = DatabaseMongo;
         }

@@ -50,18 +50,14 @@ namespace CustomerOrdersApi
         private readonly ILogger<ProductsController> logger;
 
 
-        private HalClient client = new HalClient(new HalConfiguration());
-        private HALAttributeConverter converter = new HALAttributeConverter();
-
-        private MongoClient dbClient;
-        private IMongoCollection<CustomerOrder> collection;
-        public ProductsController(IOptions<AppSettings> options, ILogger<ProductsController> logger) : base()
+       public class ProductsController : ControllerBase
         {
-            this.AppSettings = options.Value;
-            this.logger = logger;
-            dbClient = new MongoClient(AppSettings.Data.MongoConnection.ConnectionString);
-            IMongoDatabase database = dbClient.GetDatabase(AppSettings.Data.MongoConnection.Database);
-            collection = database.GetCollection<CustomerOrder>("customerOrder");
+            private IDatabaseMongo _DatabaseMongo;
+
+           
+        public ProductsController(IDatabaseMongo DatabaseMongoIDatabaseMongo _DatabaseMongo) : base()
+        {
+            _DatabaseMongo = DatabaseMongo;
         }
 
         [HttpGet]

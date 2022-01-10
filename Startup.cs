@@ -35,18 +35,8 @@ namespace CustomerOrdersApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var outputSettings = JsonSerializerSettingsProvider.CreateSerializerSettings();
-
-            services
-                .AddOptions()
-                .Configure<AppSettings>(Configuration)
-                .AddMvc()
-                .AddMvcOptions(c => {
-                    c.OutputFormatters.Add(new JsonHalOutputFormatter(
-                        outputSettings,
-                        halJsonMediaTypes: new string[] { "application/hal+json", "application/vnd.example.hal+json", "application/vnd.example.hal.v1+json" }
-                    ));
-                });
+          services.AddControllers();
+            services.AddDatabase<IDatabaseMongo DatabaseMongo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
